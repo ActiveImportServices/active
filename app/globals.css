@@ -1,26 +1,229 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Premium Construction Theme - Rich Dark Navy */
+  --background: #0a1628;
+  --background-secondary: #0d1b2a;
+  --background-tertiary: #020617;
+  --foreground: #ffffff;
+
+  /* Brand Colors - More Vibrant */
+  --primary: #0a1628; /* Rich Navy */
+  --secondary: #1e293b; /* Slate */
+  --accent: #ff6b00; /* Vibrant Orange */
+  --accent-yellow: #fbbf24; /* Machinery Yellow */
+
+  /* Grays & Neutrals - Better Contrast */
+  --concrete: #94a3b8; /* Lighter for better readability */
+  --steel: #64748b;
+  --muted: #475569;
+  --dark-surface: #0f172a;
+  --card-bg: rgba(15, 23, 42, 0.6);
+
+  /* Glass Morphism - Enhanced */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-concrete: var(--concrete);
+  --color-steel: var(--steel);
+  --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Rich Navy Backgrounds */
+  --color-navy-darker: #020617;
+  --color-navy-dark: #0a1628;
+  --color-navy: #0d1b2a;
+  --color-navy-light: #1e293b;
+
+  /* Custom Animations */
+  --animate-slide-in-up: slide-in-up 0.6s ease-out;
+  --animate-fade-in: fade-in 0.8s ease-out;
+  --animate-scale-in: scale-in 0.5s ease-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  background: var(--background);
+  background: #0a1628;
+  background-image:
+    radial-gradient(at 40% 20%, rgba(30, 64, 175, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(255, 107, 0, 0.1) 0px, transparent 50%),
+    linear-gradient(135deg, #0a1628 0%, #0d1b2a 50%, #020617 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Subtle noise/grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content above texture */
+body > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-yellow);
+}
+
+/* Animations */
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Morphism - Enhanced */
+.glass {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Separators */
+.section-border {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Atmospheric Glow */
+.glow-blue {
+  box-shadow: 0 0 80px rgba(30, 64, 175, 0.3);
+}
+
+.glow-orange {
+  box-shadow: 0 0 80px rgba(255, 107, 0, 0.3);
+}
+
+/* Animated Gradient Background */
+.animated-gradient {
+  background: linear-gradient(270deg, #0a1628, #0d1b2a, #1e293b, #0a1628);
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
+}
+
+/* Rich Background Variants */
+.bg-rich-navy {
+  background: linear-gradient(135deg, #0a1628 0%, #0d1b2a 100%);
+}
+
+.bg-deep-space {
+  background: radial-gradient(ellipse at top, #0d1b2a, #020617);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent);
+  color: white;
 }
