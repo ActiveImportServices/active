@@ -71,7 +71,7 @@ export default function Button({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={classes}
-      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
+      {...(props as any)}
     >
       {children}
     </motion.button>
